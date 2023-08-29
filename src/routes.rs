@@ -26,9 +26,9 @@ pub async fn create_routes(database: DatabaseConnection) -> Router {
     let app_state = Arc::new(AppState { database });
 
     Router::new()
-        .route("/", get(hello_world))
         // Task Routes
         .route("/tasks", post(create_task))
+        .route("/tasks/:id", put(update_task))
         .route("/tasks/:id/partials", patch(partial_update_task))
         .route("/tasks/:id", delete(delete_task))
         // User Routes
@@ -38,11 +38,12 @@ pub async fn create_routes(database: DatabaseConnection) -> Router {
             app_state.clone(),
             auth_middleware,
         ))
+        // Test routes
+        .route("/", get(hello_world))
         .route("/custom-json-extractor", post(custom_json_extractor))
         // Task Routes
         .route("/tasks", get(get_all_tasks))
         .route("/tasks/:id", get(get_one_task))
-        .route("/tasks/:id", put(update_task))
         // User Routes
         .route("/users", post(create_user))
         .route("/users/login", post(login))

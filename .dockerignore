@@ -1,8 +1,5 @@
 # compiled output
 /target
 
-#  Rest API test files
-/thunder-tests
-
 # local env files
 .env

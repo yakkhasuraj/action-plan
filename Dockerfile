@@ -14,6 +14,8 @@ RUN cargo fetch
 # Bundle app source
 COPY . .
 
-EXPOSE 3000
+# Document port intended to be published
+EXPOSE 5000
+
 # Set the default command to run your application
-CMD ["cargo", "run", "--release"]
+CMD ["cargo", "run"]
